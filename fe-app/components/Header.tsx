@@ -2,11 +2,20 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
+import { usePathname, useSearchParams } from "next/navigation";
 import styled from "styled-components";
 
 const LOGO_URL = process.env.NEXT_PUBLIC_LOGO_URL!;
 
 export default function Header() {
+  const t = useTranslations();
+  const pathname = usePathname();
+  const locale = useLocale();
+  const searchParams = useSearchParams();
+  const queryString = searchParams.toString();
+  const querySuffix = queryString ? `?${queryString}` : "";
+
   return (
     <HeaderWrapper>
       <HeaderContainer>
@@ -21,17 +30,38 @@ export default function Header() {
           />
         </LogoContainer>
 
-        {/* Navigation */}
-        <Nav>
-          <NavList>
-            <NavItem>
-              <StyledLink href="/">Home</StyledLink>
-            </NavItem>
-            <NavItem>
-              <StyledLink href="/applications">Applications</StyledLink>
-            </NavItem>
-          </NavList>
-        </Nav>
+        {/* Navigation & Language Links */}
+        <RightContainer>
+          <Nav>
+            <NavList>
+              <NavItem>
+                <StyledLink href={`/${locale}`}>
+                  {t("home")}
+                </StyledLink>
+              </NavItem>
+              <NavItem>
+                <StyledLink href={`/${locale}/applications`}>
+                  {t("applications")}
+                </StyledLink>
+              </NavItem>
+            </NavList>
+          </Nav>
+
+          {/* Language Switcher */}
+          <LanguageSwitcher>
+            <LangLink
+              href={`/en${pathname.replace(/^\/(en|fr)/, "")}${querySuffix}`}
+            >
+              En
+            </LangLink>
+            <Divider>|</Divider>
+            <LangLink
+              href={`/fr${pathname.replace(/^\/(en|fr)/, "")}${querySuffix}`}
+            >
+              Fr
+            </LangLink>
+          </LanguageSwitcher>
+        </RightContainer>
       </HeaderContainer>
     </HeaderWrapper>
   );
@@ -57,6 +87,7 @@ const HeaderContainer = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
     padding: 12px;
+    gap: 12px;
   }
 `;
 
@@ -70,11 +101,13 @@ const LogoContainer = styled.div`
   }
 `;
 
-const Nav = styled.nav`
-  @media (max-width: 768px) {
-    margin-top: 10px;
-  }
+const RightContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 24px;
 `;
+
+const Nav = styled.nav``;
 
 const NavList = styled.ul`
   display: flex;
@@ -82,12 +115,6 @@ const NavList = styled.ul`
   gap: 24px;
   margin: 0;
   padding: 0;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    text-align: center;
-    gap: 12px;
-  }
 `;
 
 const NavItem = styled.li`
@@ -103,4 +130,28 @@ const StyledLink = styled(Link)`
   &:hover {
     color: #007bff;
   }
+`;
+
+// Language Switcher
+const LanguageSwitcher = styled.div`
+  display: flex;
+  gap: 12px;
+`;
+
+const LangLink = styled(Link)`
+  text-decoration: none;
+  font-weight: 500;
+  color: #666;
+  font-size: 14px;
+  transition: color 0.3s ease-in-out;
+
+  &:hover {
+    color: #007bff;
+    text-decoration: underline;
+  }
+`;
+
+const Divider = styled.span`
+  color: #ccc;
+  font-size: 14px;
 `;

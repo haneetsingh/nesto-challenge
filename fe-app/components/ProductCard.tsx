@@ -1,34 +1,32 @@
 import { HTMLAttributes } from "react";
-import styled from "styled-components";
+import { useTranslations } from "next-intl";
+import styled, { css as styledCss, CSSProp } from "styled-components";
 import Button from "./Button";
 import { Product } from "../types";
-
-interface ProductCardProps {
-  product: Product;
-  onSelect?: () => void;
-  isSelected?: boolean;
-}
 
 interface ProductCardProps extends HTMLAttributes<HTMLDivElement> {
   product: Product;
   onSelect?: () => void;
   isSelected?: boolean;
+  css?: CSSProp;
 }
 
-export default function ProductCard({ product, onSelect, isSelected, ...rest }: ProductCardProps) {
+export default function ProductCard({ product, onSelect, isSelected, css, ...rest }: ProductCardProps) {
+  const t = useTranslations();
+
   return (
-    <Card {...rest}>
+    <Card css={css} {...rest}>
       <Title>
         {isSelected
           ? "Product Selected"
           : product.type === "FIXED"
-            ? "Best Fix"
-            : "Best Variable"
+            ? t("bestFix")
+            : t("bestVariable")
         }
       </Title>
       <Name>{product.name}</Name>
       <Rate>{product.bestRate}%</Rate>
-      <Label>(Best Rate)</Label>
+      <Label>({t("bestRate")})</Label>
       <Lender>{product.lenderName}</Lender>
       <Label>({product.lenderType})</Label>
       {!isSelected
@@ -37,7 +35,7 @@ export default function ProductCard({ product, onSelect, isSelected, ...rest }: 
           onClick={onSelect}
           style={{ marginTop: 32 }}
         >
-          Select this product
+          {t("selectProduct")}
         </Button>
         : null
       }
@@ -45,7 +43,7 @@ export default function ProductCard({ product, onSelect, isSelected, ...rest }: 
   );
 }
 
-const Card = styled.div`
+const Card = styled.div<{ css?: CSSProp }>`
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 16px;
@@ -57,6 +55,8 @@ const Card = styled.div`
   &:hover {
     box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.15);
   }
+
+  ${({ css }) => css && styledCss`${css}`}
 `;
 
 const Title = styled.h2`

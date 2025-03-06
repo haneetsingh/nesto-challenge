@@ -28,16 +28,24 @@ a {
   text-decoration: none;
 }
 
-.main-content {
-  min-height: 100vh;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 3rem;
-}
-
 .mortgage-products {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: 1rem;
   justify-content: center;
+  margin-top: 12px;
 }
+
+@media screen and (min-width: 768px) {
+  .main-content {
+    min-height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem;
+  }
+
+.mortgage-products {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+

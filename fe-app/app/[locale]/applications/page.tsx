@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { getApplications } from "@/lib/api";
 import { Application } from "@/types";
 import Link from "next/link";
@@ -9,6 +10,8 @@ import Spinner from "@/components/Spinner";
 import { showToast } from "@/components/ToastNotification";
 
 export default function ApplicationsPage() {
+  const t = useTranslations();
+  const locale = useLocale();
   const [applications, setApplications] = useState<Application[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -31,12 +34,12 @@ export default function ApplicationsPage() {
 
   return (
     <Container>
-      <Title>Your Applications</Title>
+      <Title>{t("applications_title")}</Title>
       <Grid>
         {applications.map((app) => (
           <Card key={app.id}>
-            <AppId>Application ID: {app.id}</AppId>
-            <StyledLink href={`/apply?id=${app.id}`}>Edit Application</StyledLink>
+            <AppId>{t("application_id")}: {app.id}</AppId>
+            <StyledLink href={`/${locale}/apply?id=${app.id}`}>{t("edit_application")}</StyledLink>
           </Card>
         ))}
       </Grid>
