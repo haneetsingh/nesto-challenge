@@ -5,11 +5,12 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   onClick?: () => void;
   variant?: "primary" | "secondary" | "submit";
+  style?: React.CSSProperties;
 }
 
-export default function Button({ children, onClick, variant = "primary" }: ButtonProps) {
+export default function Button({ children, onClick, variant = "primary", style }: ButtonProps) {
   return (
-    <StyledButton onClick={onClick} variant={variant}>
+    <StyledButton onClick={onClick} variant={variant} style={style}>
       {children}
     </StyledButton>
   );

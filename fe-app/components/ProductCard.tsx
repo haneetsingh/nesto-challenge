@@ -1,6 +1,7 @@
-import { Product } from "../types";
+import { HTMLAttributes } from "react";
 import styled from "styled-components";
 import Button from "./Button";
+import { Product } from "../types";
 
 interface ProductCardProps {
   product: Product;
@@ -8,9 +9,15 @@ interface ProductCardProps {
   isSelected?: boolean;
 }
 
-export default function ProductCard({ product, onSelect, isSelected }: ProductCardProps) {
+interface ProductCardProps extends HTMLAttributes<HTMLDivElement> {
+  product: Product;
+  onSelect?: () => void;
+  isSelected?: boolean;
+}
+
+export default function ProductCard({ product, onSelect, isSelected, ...rest }: ProductCardProps) {
   return (
-    <Card>
+    <Card {...rest}>
       <Title>
         {isSelected
           ? "Product Selected"
@@ -28,6 +35,7 @@ export default function ProductCard({ product, onSelect, isSelected }: ProductCa
         ? <Button
           variant="primary"
           onClick={onSelect}
+          style={{ marginTop: 32 }}
         >
           Select this product
         </Button>
@@ -55,25 +63,30 @@ const Title = styled.h2`
   font-size: 18px;
   font-weight: bold;
   color: #333;
+  margin-bottom: 16px;
 `;
 
 const Name = styled.p`
   font-size: 14px;
   color: #666;
+  margin-bottom: 16px;
 `;
 
 const Rate = styled.p`
   font-size: 24px;
   font-weight: bold;
   color: #007bff;
+  margin-top: 24px;
 `;
 
 const Lender = styled.p`
   font-size: 14px;
   color: #888;
+  margin-top: 24px;
 `;
 
 const Label = styled.p`
   font-size: 14px;
   color: #888;
+  margin-bottom: 16px;
 `;

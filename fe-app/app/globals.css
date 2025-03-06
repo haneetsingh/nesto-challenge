@@ -27,3 +27,17 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+.main-content {
+  min-height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem;
+}
+
+.mortgage-products {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  justify-content: center;
+}
