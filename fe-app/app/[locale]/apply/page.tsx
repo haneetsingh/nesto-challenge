@@ -133,9 +133,10 @@ export default function ApplyPage() {
             `}
           />
           <Button
+            block="true"
             variant="primary"
             onClick={() => clearProduct()}
-            style={{ width: "100%" }}>
+          >
             {t("select_another_product")}
           </Button>
         </Sidebar>

@@ -5,24 +5,41 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   onClick?: () => void;
   variant?: "primary" | "secondary" | "submit";
+  block?: string;
   style?: React.CSSProperties;
 }
 
-export default function Button({ children, onClick, variant = "primary", style }: ButtonProps) {
+export default function Button({
+  children,
+  onClick,
+  variant = "primary",
+  block = "false",
+  style,
+}: ButtonProps) {
   return (
-    <StyledButton onClick={onClick} variant={variant} style={style}>
+    <StyledButton
+      onClick={onClick}
+      variant={variant}
+      block={block}
+      style={style}
+    >
       {children}
     </StyledButton>
   );
 }
 
-const StyledButton = styled.button<{ variant: "primary" | "secondary" | "submit"; display?: boolean }>`
-  width: ${({ display }) => (display ? "100%" : "auto")};
+const StyledButton = styled.button<{
+  variant: "primary" | "secondary" | "submit";
+  block?: string;
+}>`
+  width: ${({ block }) => (block === "true" ? "100%" : "auto")};
   padding: 12px;
   font-size: 16px;
   font-weight: bold;
+  background-color: #0056b3;
   border: none;
   border-radius: 4px;
+  color: #fff;
   cursor: pointer;
   transition: background 0.3s ease;
 
@@ -31,7 +48,6 @@ const StyledButton = styled.button<{ variant: "primary" | "secondary" | "submit"
       case "primary":
         return `
           background-color: #007bff;
-          color: white;
 
           &:hover {
             background-color: #0056b3;
@@ -50,7 +66,6 @@ const StyledButton = styled.button<{ variant: "primary" | "secondary" | "submit"
       case "submit":
         return `
           background-color: #28a745;
-          color: white;
 
           &:hover {
             background-color: #218838;

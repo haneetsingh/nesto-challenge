@@ -18,15 +18,15 @@ export default function ProductCard({ product, onSelect, isSelected, css, ...res
     <Card css={css} {...rest}>
       <Title>
         {isSelected
-          ? "Product Selected"
+          ? t("product_selected")
           : product.type === "FIXED"
-            ? t("bestFix")
-            : t("bestVariable")
+            ? t("best_fix")
+            : t("best_variable")
         }
       </Title>
       <Name>{product.name}</Name>
       <Rate>{product.bestRate}%</Rate>
-      <Label>({t("bestRate")})</Label>
+      <Label>({t("best_rate")})</Label>
       <Lender>{product.lenderName}</Lender>
       <Label>({product.lenderType})</Label>
       {!isSelected
@@ -35,7 +35,7 @@ export default function ProductCard({ product, onSelect, isSelected, css, ...res
           onClick={onSelect}
           style={{ marginTop: 32 }}
         >
-          {t("selectProduct")}
+          {t("select_product")}
         </Button>
         : null
       }

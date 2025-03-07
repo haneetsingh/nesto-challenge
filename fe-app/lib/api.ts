@@ -4,7 +4,7 @@ import { Product, Application, CreateApplication } from "../types";
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL!;
 const NESTO_CANDIDATE = process.env.NEXT_PUBLIC_NESTO_CANDIDATE!;
 
-const api = axios.create({
+export const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
     Accept: "application/json",
