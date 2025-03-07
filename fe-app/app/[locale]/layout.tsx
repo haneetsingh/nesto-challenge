@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -17,16 +18,18 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Mortgage Selector App",
-  description: "Mortgage Selector App",};
+  description: "Mortgage Selector App",
+};
 
 export default async function RootLayout({
   children,
   params,
-}: Readonly<{
-  children: React.ReactNode,
-  params: { locale: string }
-}>) {
+}: {
+  children: ReactNode;
+  params: Promise<{ locale: string }>;
+}) {
   const { locale } = await params;
+
   return (
     <html lang={locale}>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>

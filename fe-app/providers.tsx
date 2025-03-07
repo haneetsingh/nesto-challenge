@@ -14,7 +14,7 @@ export default function Providers({ children, locale }: Props) {
   const messages: AbstractIntlMessages = translations[locale] || translations["en"];
 
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
+    <NextIntlClientProvider locale={locale} messages={messages} timeZone="UTC">
       {children}
     </NextIntlClientProvider>
   );
