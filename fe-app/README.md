@@ -45,3 +45,9 @@ To generate a test coverage report, run:
 ```bash
 npm run test:coverage
 ```
+
+## Deployment
+
+This application is deployed on Vercel. You can access the live version here:
+
+🔗 [Live Demo](https://nesto-challenge-sable.vercel.app/)
