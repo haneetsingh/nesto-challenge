@@ -2,15 +2,19 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
 import { Product } from "@/types";
 import { useProductStore } from "@/store/useProductStore";
 import { getMortgageProducts, createApplication } from "@/lib/api";
 import ProductCard from "@/components/ProductCard";
 import Spinner from "@/components/Spinner";
 import { showToast } from "@/components/ToastNotification";
+import Message from "@/components/Message";
 
 export default function HomePage() {
   const router = useRouter();
+  const locale = useLocale();
+  const t = useTranslations();
   const { setSelectedProduct } = useProductStore();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -21,20 +25,20 @@ export default function HomePage() {
         setProducts(data);
       })
       .catch((error) => {
-        showToast(`Failed to fetch products - ${error}`, "error");
+        showToast(`${t("product_error")} - ${error}`, "error");
       })
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [t]);
 
   const handleSelectProduct = async (product: Product) => {
     try {
       const application = await createApplication({ productId: product.id });
       setSelectedProduct(product);
-      router.push(`/apply?id=${application.id}`);
+      router.push(`${locale}/apply?id=${application.id}`);
     } catch (error) {
-      console.error("Failed to create application", error);
+      showToast(`${t("application_error")} - ${error}`, "error");
     }
   };
 
@@ -48,7 +52,8 @@ export default function HomePage() {
 
 
   if (loading) return <Spinner />;
-  if (!products || products.length === 0) return <p>No mortgage products available.</p>;
+  if (!products || products.length === 0)
+    return <Message>{t("no_products_message")}</Message>;
 
   return (
     <div className="mortgage-products">

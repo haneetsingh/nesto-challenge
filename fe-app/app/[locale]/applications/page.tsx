@@ -8,6 +8,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import Spinner from "@/components/Spinner";
 import { showToast } from "@/components/ToastNotification";
+import Message from "@/components/Message";
 
 export default function ApplicationsPage() {
   const t = useTranslations();
@@ -21,28 +22,30 @@ export default function ApplicationsPage() {
         const response = await getApplications();
         setApplications(response.filter(app => app.applicants.length > 0));
       } catch (err) {
-        console.error("Failed to load applications ", err);
-        showToast(`Failed to load applications - ${err}`, "error");
+        showToast(`${t("failed_to_load")} - ${err}`, "error");
       } finally {
         setLoading(false);
       }
     };
     fetchApplications();
-  }, []);
+  }, [t]);
 
   if (loading) return <Spinner />;
 
   return (
     <Container>
       <Title>{t("applications_title")}</Title>
-      <Grid>
-        {applications.map((app) => (
-          <Card key={app.id}>
-            <AppId>{t("application_id")}: {app.id}</AppId>
-            <StyledLink href={`/${locale}/apply?id=${app.id}`}>{t("edit_application")}</StyledLink>
-          </Card>
-        ))}
-      </Grid>
+      {applications.length > 0
+        ? <Grid>
+          {applications.map((app) => (
+            <Card key={app.id}>
+              <AppId>{t("application_id")}: {app.id}</AppId>
+              <StyledLink href={`/${locale}/apply?id=${app.id}`}>{t("edit_application")}</StyledLink>
+            </Card>
+          ))}
+        </Grid>
+        : <Message>{t("no_applications_message")}</Message>
+      }
     </Container>
   );
 }

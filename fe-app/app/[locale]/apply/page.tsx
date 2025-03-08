@@ -42,11 +42,11 @@ export default function ApplyPage() {
       setApplication(app);
       setFormData(app.applicants[0] || initialFormData);
     } catch (error) {
-      showToast(`Application not found - ${error}`, "error");
+      showToast(`${t("application_not_found_message")} - ${error}`, "error");
     } finally {
       setLoading(false);
     }
-  }, [applicationId]);
+  }, [applicationId, t]);
 
   useEffect(() => {
     fetchApplication();
@@ -108,8 +108,7 @@ export default function ApplyPage() {
       showToast(t("application_success"), "success");
       router.push(`/${locale}/applications`);
     } catch (error) {
-      console.error("Failed to update application", error);
-      showToast(t("application_error"), "error");
+      showToast(`${t("application_error")} - ${error}`, "error");
     } finally {
       setSubmitting(false);
     }

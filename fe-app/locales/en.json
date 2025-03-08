@@ -22,5 +22,14 @@
   "invalid_email": "Please enter a valid email",
   "invalid_phone": "Please enter a valid phone number",
   "application_success": "Applicant information saved successfully!",
-  "application_error": "An error occurred while saving applicant information. Please try again."
-}
+  "application_error": "An error occurred while saving applicant information.",
+  "application_not_found": "Application not found",
+  "application_not_found_message": "The application you are looking for does not exist. Please try again.",
+  "failed_to_load": "Failed to load application. Please try again.",
+  "no_applications_message": "You have not created any applications yet. Select a product to get started.",
+  "product_error": "Failed to load product information. Please try again.",
+  "product_not_found": "Product not found",
+  "product_not_found_message": "The product you are looking for does not exist. Please try again.",
+  "no_products": "No products available",
+  "no_products_message": "There are no products available at the moment. Please try again later."
+  }

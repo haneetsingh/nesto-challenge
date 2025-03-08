@@ -22,5 +22,14 @@
   "invalid_email": "Veuillez entrer un e-mail valide",
   "invalid_phone": "Veuillez entrer un numéro de téléphone valide",
   "application_success": "Informations du candidat enregistrées avec succès!",
-  "application_error": "Une erreur s'est produite lors de l'enregistrement des informations du candidat. Veuillez réessayer."
+  "application_error": "Une erreur s'est produite lors de l'enregistrement des informations du candidat. Veuillez réessayer.",
+  "application_not_found": "Application introuvable",
+  "application_not_found_message": "L'application que vous recherchez n'existe pas.",
+  "failed_to_load": "Échec du chargement de l'application. Veuillez réessayer.",
+  "no_applications_message": "Vous n'avez pas encore créé d'applications. Sélectionnez un produit pour commencer.",
+  "product_error": "Échec du chargement des informations sur le produit. Veuillez réessayer.",
+  "product_not_found": "Produit introuvable",
+  "product_not_found_message": "Le produit que vous recherchez n'existe pas. Veuillez réessayer.",
+  "no_products": "Aucun produit disponible",
+  "no_products_message": "Il n'y a pas de produits disponibles pour le moment. Veuillez réessayer plus tard."
 }
