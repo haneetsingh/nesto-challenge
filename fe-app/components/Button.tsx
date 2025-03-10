@@ -15,6 +15,8 @@ export default function Button({
   variant = "primary",
   block = "false",
   style,
+  type = "button",
+  ...props
 }: ButtonProps) {
   return (
     <StyledButton
@@ -22,6 +24,8 @@ export default function Button({
       variant={variant}
       block={block}
       style={style}
+      type={type}
+      {...props}
     >
       {children}
     </StyledButton>

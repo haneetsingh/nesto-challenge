@@ -179,6 +179,7 @@ export default function ApplyPage() {
 
           <ButtonGroup>
             <Button
+              type="reset"
               variant="secondary"
               onClick={() => router.push(`/${locale}/applications`)}
               disabled={loading || submitting}
