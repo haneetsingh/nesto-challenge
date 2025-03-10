@@ -20,7 +20,9 @@ export default function ApplicationsPage() {
     const fetchApplications = async () => {
       try {
         const response = await getApplications();
-        setApplications(response.filter(app => app.applicants.length > 0));
+        const filteredApplications = response.filter(app => app.applicants.length > 0);
+        const sortedApplications = filteredApplications.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+        setApplications(sortedApplications);
       } catch (err) {
         showToast(`${t("failed_to_load")} - ${err}`, "error");
       } finally {
@@ -39,6 +41,9 @@ export default function ApplicationsPage() {
         ? <Grid>
           {applications.map((app) => (
             <Card key={app.id}>
+              <CreatedAt>
+                {t("created_at")}: {new Date(app.createdAt).toLocaleDateString(locale, { year: 'numeric', month: 'short', day: '2-digit' })}
+              </CreatedAt>
               <AppId>{t("application_id")}: {app.id}</AppId>
               <StyledLink href={`/${locale}/apply?id=${app.id}`}>{t("edit_application")}</StyledLink>
             </Card>
@@ -90,4 +95,10 @@ const StyledLink = styled(Link)`
   &:hover {
     text-decoration: underline;
   }
+`;
+
+const CreatedAt = styled.p`
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 8px;
 `;

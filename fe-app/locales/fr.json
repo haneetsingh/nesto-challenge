@@ -31,5 +31,6 @@
   "product_not_found": "Produit introuvable",
   "product_not_found_message": "Le produit que vous recherchez n'existe pas. Veuillez réessayer.",
   "no_products": "Aucun produit disponible",
-  "no_products_message": "Il n'y a pas de produits disponibles pour le moment. Veuillez réessayer plus tard."
+  "no_products_message": "Il n'y a pas de produits disponibles pour le moment. Veuillez réessayer plus tard.",
+  "created_at": "Créé le"
 }
