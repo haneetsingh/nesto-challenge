@@ -134,7 +134,10 @@ export default function ApplyPage() {
           <Button
             block="true"
             variant="primary"
-            onClick={() => clearProduct()}
+            onClick={() => {
+              clearProduct();
+              router.push(`/${locale}`);
+            }}
           >
             {t("select_another_product")}
           </Button>
